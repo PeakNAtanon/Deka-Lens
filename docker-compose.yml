@@ -1,0 +1,25 @@
+services:
+  deka-lens:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: deka-lens-next:latest
+    environment:
+      NODE_ENV: production
+      NEXT_TELEMETRY_DISABLED: "1"
+    restart: unless-stopped
+
+  nginx:
+    image: nginx:1.27-alpine
+    container_name: deka-lens-nginx
+    depends_on:
+      - deka-lens
+    ports:
+      - "127.0.0.1:8080:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - nginx-cache:/var/cache/nginx
+    restart: unless-stopped
+
+volumes:
+  nginx-cache:

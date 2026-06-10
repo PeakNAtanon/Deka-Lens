@@ -1,0 +1,30 @@
+# Dependencies
+node_modules/
+
+# Next.js build output
+.next/
+out/
+
+# Local caches and generated files
+__pycache__/
+*.py[cod]
+*.tsbuildinfo
+*.log
+
+# Local environment and secrets
+.env
+.env.*
+!.env.example
+
+# Local assistant/tooling state
+.codex/
+.impeccable/
+.agents/
+
+# OS/editor files
+.DS_Store
+Thumbs.db
+
+# Cloudflare tunnel credentials, keep only examples in git
+cloudflared/*.json
+!cloudflared/*.example

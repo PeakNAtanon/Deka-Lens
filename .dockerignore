@@ -1,0 +1,16 @@
+.next
+node_modules
+__pycache__
+.git
+.codex
+.impeccable
+.agents
+*.tsbuildinfo
+*.log
+.env*
+Dockerfile
+docker-compose.yml
+README_PYTHON.md
+requirements.txt
+scraper_backend.py
+streamlit_app.py
