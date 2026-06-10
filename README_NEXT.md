@@ -29,7 +29,7 @@ corepack pnpm start:standalone
 
 `Cloudflare Tunnel -> Nginx (Docker) -> Next.js (Docker)`
 
-ในโครงนี้ `Nginx` จะเปิดเฉพาะ `127.0.0.1:8080` บนเครื่อง server เท่านั้น และให้ `cloudflared` ที่รันบน host เป็นทางเข้าเดียวจากภายนอก
+ในโครงนี้ `Nginx` จะเปิดเฉพาะ `127.0.0.1:18080` บนเครื่อง server เท่านั้น และให้ `cloudflared` ที่รันบน host เป็นทางเข้าเดียวจากภายนอก
 
 ### 1) รันแอปด้วย Docker Compose
 
@@ -46,8 +46,8 @@ docker compose config
 ตรวจว่า origin ตอบบนเครื่องเดียวกัน:
 
 ```bash
-curl http://127.0.0.1:8080
-curl "http://127.0.0.1:8080/api/search?q=เงินกู้"
+curl http://127.0.0.1:18080
+curl "http://127.0.0.1:18080/api/search?q=เงินกู้"
 ```
 
 ### 2) ติดตั้ง Cloudflare Tunnel บน Debian/Ubuntu
@@ -102,7 +102,7 @@ credentials-file: /etc/cloudflared/<TUNNEL_ID>.json
 
 ingress:
   - hostname: <your-domain>
-    service: http://localhost:8080
+    service: http://localhost:18080
   - service: http_status:404
 ```
 
@@ -126,7 +126,7 @@ journalctl -u cloudflared -f
 
 ### 5) เข้าใช้งานผ่านโดเมน Cloudflare
 
-เมื่อ tunnel พร้อมแล้ว ให้เปิดโดเมนที่ผูกไว้กับ tunnel จากภายนอกได้ทันที โดย origin จริงยังคงเป็น `http://localhost:8080`
+เมื่อ tunnel พร้อมแล้ว ให้เปิดโดเมนที่ผูกไว้กับ tunnel จากภายนอกได้ทันที โดย origin จริงยังคงเป็น `http://localhost:18080`
 
 ## การดูแลระบบ
 
@@ -149,7 +149,7 @@ sudo systemctl restart cloudflared
 ตรวจว่า tunnel ยังชี้เข้า origin ถูกต้อง:
 
 ```bash
-curl http://127.0.0.1:8080
+curl http://127.0.0.1:18080
 cloudflared tunnel list
 cloudflared tunnel info <TUNNEL_NAME>
 ```

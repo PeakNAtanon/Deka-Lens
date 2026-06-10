@@ -3,5 +3,5 @@ credentials-file: /etc/cloudflared/YOUR_TUNNEL_ID.json
 
 ingress:
   - hostname: deka.example.com
-    service: http://localhost:8080
+    service: http://localhost:18080
   - service: http_status:404
